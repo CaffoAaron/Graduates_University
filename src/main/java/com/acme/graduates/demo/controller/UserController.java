@@ -29,7 +29,7 @@ public class UserController {
 
     @Operation(summary = "Get All user", description = "Get All available user", tags = {"user"})
     @GetMapping("/user")
-    public Page<UserResource> getAllUserNoChef(Pageable pageable) {
+    public Page<UserResource> getAllUser(Pageable pageable) {
         Page<User> userNoChef = userService.getAllUser(pageable);
         List<UserResource> resources = userNoChef.getContent()
                 .stream()
@@ -40,27 +40,27 @@ public class UserController {
 
     @Operation(summary = "Get user By Id", description = "Get user for given Id", tags = {"user"})
     @GetMapping("/user/{id}")
-    public UserResource getUserNoChefById(@PathVariable(name = "id") Long id){
+    public UserResource getUserById(@PathVariable(name = "id") Long id){
         return convertToResource(userService.getUserById(id));
     }
 
     @Operation(summary = "Create user", description = "Create a new user", tags = {"user"})
     @PostMapping("/user")
-    public UserResource createUserNoChef(@Valid @RequestBody SaveUserResource resource){
+    public UserResource createUser(@Valid @RequestBody SaveUserResource resource){
         User userNoChef = convertToEntity(resource);
         return convertToResource(userService.createUser(userNoChef));
     }
 
     @Operation(summary = "Update user", description = "Update user with given Id", tags = {"user"})
     @PutMapping("/user/{id}")
-    public UserResource updateUserNoChefResource(@PathVariable(name = "id") Long userNoChefId,
+    public UserResource updateUserResource(@PathVariable(name = "id") Long userNoChefId,
                                                        @Valid @RequestBody SaveUserResource resource){
         return convertToResource(userService.updateUser(userNoChefId,convertToEntity(resource)));
     }
 
     @Operation(summary = "Delete user", description = "Delete user with given Id", tags = {"user"})
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> deleteUserChef (@PathVariable(name = "id")  Long id){
+    public ResponseEntity<?> deleteUser (@PathVariable(name = "id")  Long id){
         return userService.deleteUser(id);
     }
 

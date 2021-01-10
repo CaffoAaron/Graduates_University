@@ -2,7 +2,7 @@ package com.acme.graduates.demo.resource;
 
 import javax.validation.constraints.NotNull;
 
-public class SaveGraduateRename {
+public class SaveGraduateResource {
     @NotNull
     private Integer year;
 
