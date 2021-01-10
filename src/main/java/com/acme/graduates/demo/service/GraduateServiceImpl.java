@@ -3,6 +3,7 @@ package com.acme.graduates.demo.service;
 import com.acme.graduates.demo.domain.model.Graduate;
 import com.acme.graduates.demo.domain.repository.GraduateRepository;
 import com.acme.graduates.demo.domain.service.GraduateService;
+import com.acme.graduates.demo.execption.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,27 +19,36 @@ public class GraduateServiceImpl implements GraduateService {
 
     @Override
     public Page<Graduate> getAllGraduates(Pageable pageable) {
-        return null;
+        return graduateRepository.findAll(pageable);
     }
 
     @Override
     public Graduate getGraduatesById(Long graduatesId) {
-        return null;
+        return graduateRepository.findById(graduatesId).orElseThrow(() -> new ResourceNotFoundException("Graduate", "Id", graduatesId));
     }
 
     @Override
     public Graduate createGraduate(Graduate graduate) {
-        return null;
+        return graduateRepository.save(graduate);
     }
 
     @Override
     public Graduate updateGraduate(Long graduateId, Graduate graduate) {
-        return null;
+        return graduateRepository.findById(graduateId).map(graduate1 -> {
+            graduate1.setNoGraduates(graduate.getNoGraduates());
+            graduate1.setSex(graduate.getSex());
+            graduate1.setTypeCourse(graduate.getTypeCourse());
+            graduate1.setYear(graduate.getYear());
+            return graduateRepository.save(graduate1);
+        }).orElseThrow(() -> new ResourceNotFoundException("Graduate", "Id", graduateId));
     }
 
     @Override
     public ResponseEntity<?> deleteGraduate(Long graduateId) {
-        return null;
+        return graduateRepository.findById(graduateId).map(graduate -> {
+            graduateRepository.delete(graduate);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Graduate", "Id", graduateId));
     }
 
 }
