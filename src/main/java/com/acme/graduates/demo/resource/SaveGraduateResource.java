@@ -10,10 +10,10 @@ public class SaveGraduateResource {
     private String sex;
 
     @NotNull
-    private String typeCourse;
+    private String Course;
 
     @NotNull
-    private  Integer noGraduates;
+    private  Integer Graduates;
 
     public Integer getYear() {
         return year;
@@ -31,19 +31,20 @@ public class SaveGraduateResource {
         this.sex = sex;
     }
 
-    public String getTypeCourse() {
-        return typeCourse;
+
+    public String getCourse() {
+        return Course;
     }
 
-    public void setTypeCourse(String typeCourse) {
-        this.typeCourse = typeCourse;
+    public void setCourse(String course) {
+        Course = course;
     }
 
-    public Integer getNoGraduates() {
-        return noGraduates;
+    public Integer getGraduates() {
+        return Graduates;
     }
 
-    public void setNoGraduates(Integer noGraduates) {
-        this.noGraduates = noGraduates;
+    public void setGraduates(Integer graduates) {
+        Graduates = graduates;
     }
 }
