@@ -6,8 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface GraduateService {
-    Page<Graduate> getAllGraduates(Pageable pageable);
+    List<Graduate> getAllGraduates();
 
     Graduate getGraduatesById(Long graduatesId);
 

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GraduateServiceImpl implements GraduateService {
 
@@ -18,8 +20,8 @@ public class GraduateServiceImpl implements GraduateService {
 
 
     @Override
-    public Page<Graduate> getAllGraduates(Pageable pageable) {
-        return graduateRepository.findAll(pageable);
+    public List<Graduate> getAllGraduates() {
+        return graduateRepository.findAll();
     }
 
     @Override
