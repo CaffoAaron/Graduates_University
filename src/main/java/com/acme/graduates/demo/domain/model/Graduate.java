@@ -17,10 +17,10 @@ public class Graduate {
     private String sex;
 
     @NotNull
-    private String typeCourse;
+    private String Course;
 
     @NotNull
-    private  Integer noGraduates;
+    private String  Graduates;
 
     public Long getId() {
         return id;
@@ -46,19 +46,20 @@ public class Graduate {
         this.sex = sex;
     }
 
-    public String getTypeCourse() {
-        return typeCourse;
+
+    public String getCourse() {
+        return Course;
     }
 
-    public void setTypeCourse(String typeCourse) {
-        this.typeCourse = typeCourse;
+    public void setCourse(String course) {
+        Course = course;
     }
 
-    public Integer getNoGraduates() {
-        return noGraduates;
+    public String getGraduates() {
+        return Graduates;
     }
 
-    public void setNoGraduates(Integer noGraduates) {
-        this.noGraduates = noGraduates;
+    public void setGraduates(String graduates) {
+        Graduates = graduates;
     }
 }
