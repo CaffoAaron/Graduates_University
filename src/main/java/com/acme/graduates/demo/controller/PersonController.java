@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class PersonController {
 
@@ -28,7 +29,7 @@ public class PersonController {
     private UserService userService;
 
     @Operation(summary = "Get All user", description = "Get All available user", tags = {"person"})
-    @GetMapping("/user")
+    @GetMapping("/person")
     public Page<PersonResource> getAllUser(Pageable pageable) {
         Page<User> userNoChef = userService.getAllUser(pageable);
         List<PersonResource> resources = userNoChef.getContent()
@@ -39,27 +40,27 @@ public class PersonController {
     }
 
     @Operation(summary = "Get user By Id", description = "Get user for given Id", tags = {"person"})
-    @GetMapping("/user/{id}")
+    @GetMapping("/person/{id}")
     public PersonResource getUserById(@PathVariable(name = "id") Long id){
         return convertToResource(userService.getUserById(id));
     }
 
     @Operation(summary = "Create user", description = "Create a new user", tags = {"person"})
-    @PostMapping("/user")
+    @PostMapping("/person")
     public PersonResource createUser(@Valid @RequestBody SaveUserResource resource){
         User userNoChef = convertToEntity(resource);
         return convertToResource(userService.createUser(userNoChef));
     }
 
     @Operation(summary = "Update user", description = "Update user with given Id", tags = {"person"})
-    @PutMapping("/user/{id}")
+    @PutMapping("/person/{id}")
     public PersonResource updateUserResource(@PathVariable(name = "id") Long userNoChefId,
                                              @Valid @RequestBody SaveUserResource resource){
         return convertToResource(userService.updateUser(userNoChefId,convertToEntity(resource)));
     }
 
     @Operation(summary = "Delete user", description = "Delete user with given Id", tags = {"person"})
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/person/{id}")
     public ResponseEntity<?> deleteUser (@PathVariable(name = "id")  Long id){
         return userService.deleteUser(id);
     }

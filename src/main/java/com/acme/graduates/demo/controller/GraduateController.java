@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class GraduateController {
     @Autowired
@@ -23,7 +24,6 @@ public class GraduateController {
     private GraduateService graduateService;
 
     @Operation(summary = "Get All graduate", description = "Get All available graduate", tags = {"graduate"})
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/graduate")
     public List<Graduate> getAllGraduate() {
         return graduateService.getAllGraduates();
