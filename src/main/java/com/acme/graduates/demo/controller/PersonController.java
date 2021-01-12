@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class PersonController {
 
     @Autowired
     private ModelMapper mapper;
@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Operation(summary = "Get All user", description = "Get All available user", tags = {"user"})
+    @Operation(summary = "Get All user", description = "Get All available user", tags = {"person"})
     @GetMapping("/user")
     public Page<PersonResource> getAllUser(Pageable pageable) {
         Page<User> userNoChef = userService.getAllUser(pageable);
@@ -38,27 +38,27 @@ public class UserController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary = "Get user By Id", description = "Get user for given Id", tags = {"user"})
+    @Operation(summary = "Get user By Id", description = "Get user for given Id", tags = {"person"})
     @GetMapping("/user/{id}")
     public PersonResource getUserById(@PathVariable(name = "id") Long id){
         return convertToResource(userService.getUserById(id));
     }
 
-    @Operation(summary = "Create user", description = "Create a new user", tags = {"user"})
+    @Operation(summary = "Create user", description = "Create a new user", tags = {"person"})
     @PostMapping("/user")
     public PersonResource createUser(@Valid @RequestBody SaveUserResource resource){
         User userNoChef = convertToEntity(resource);
         return convertToResource(userService.createUser(userNoChef));
     }
 
-    @Operation(summary = "Update user", description = "Update user with given Id", tags = {"user"})
+    @Operation(summary = "Update user", description = "Update user with given Id", tags = {"person"})
     @PutMapping("/user/{id}")
     public PersonResource updateUserResource(@PathVariable(name = "id") Long userNoChefId,
                                              @Valid @RequestBody SaveUserResource resource){
         return convertToResource(userService.updateUser(userNoChefId,convertToEntity(resource)));
     }
 
-    @Operation(summary = "Delete user", description = "Delete user with given Id", tags = {"user"})
+    @Operation(summary = "Delete user", description = "Delete user with given Id", tags = {"person"})
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser (@PathVariable(name = "id")  Long id){
         return userService.deleteUser(id);
