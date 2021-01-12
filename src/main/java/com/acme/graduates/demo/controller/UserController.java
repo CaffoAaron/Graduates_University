@@ -3,7 +3,7 @@ package com.acme.graduates.demo.controller;
 import com.acme.graduates.demo.domain.model.User;
 import com.acme.graduates.demo.domain.service.UserService;
 import com.acme.graduates.demo.resource.SaveUserResource;
-import com.acme.graduates.demo.resource.UserResource;
+import com.acme.graduates.demo.resource.PersonResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,9 @@ public class UserController {
 
     @Operation(summary = "Get All user", description = "Get All available user", tags = {"user"})
     @GetMapping("/user")
-    public Page<UserResource> getAllUser(Pageable pageable) {
+    public Page<PersonResource> getAllUser(Pageable pageable) {
         Page<User> userNoChef = userService.getAllUser(pageable);
-        List<UserResource> resources = userNoChef.getContent()
+        List<PersonResource> resources = userNoChef.getContent()
                 .stream()
                 .map(this::convertToResource)
                 .collect(Collectors.toList());
@@ -40,21 +40,21 @@ public class UserController {
 
     @Operation(summary = "Get user By Id", description = "Get user for given Id", tags = {"user"})
     @GetMapping("/user/{id}")
-    public UserResource getUserById(@PathVariable(name = "id") Long id){
+    public PersonResource getUserById(@PathVariable(name = "id") Long id){
         return convertToResource(userService.getUserById(id));
     }
 
     @Operation(summary = "Create user", description = "Create a new user", tags = {"user"})
     @PostMapping("/user")
-    public UserResource createUser(@Valid @RequestBody SaveUserResource resource){
+    public PersonResource createUser(@Valid @RequestBody SaveUserResource resource){
         User userNoChef = convertToEntity(resource);
         return convertToResource(userService.createUser(userNoChef));
     }
 
     @Operation(summary = "Update user", description = "Update user with given Id", tags = {"user"})
     @PutMapping("/user/{id}")
-    public UserResource updateUserResource(@PathVariable(name = "id") Long userNoChefId,
-                                                       @Valid @RequestBody SaveUserResource resource){
+    public PersonResource updateUserResource(@PathVariable(name = "id") Long userNoChefId,
+                                             @Valid @RequestBody SaveUserResource resource){
         return convertToResource(userService.updateUser(userNoChefId,convertToEntity(resource)));
     }
 
@@ -68,7 +68,7 @@ public class UserController {
         return mapper.map(resource, User.class);
     }
 
-    private UserResource convertToResource(User entity) {
-        return mapper.map(entity, UserResource.class);
+    private PersonResource convertToResource(User entity) {
+        return mapper.map(entity, PersonResource.class);
     }
 }
