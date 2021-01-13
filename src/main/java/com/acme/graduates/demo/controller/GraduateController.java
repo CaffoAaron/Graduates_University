@@ -38,8 +38,8 @@ public class GraduateController {
     @Operation(summary = "Create graduate", description = "Create a new graduate", tags = {"graduate"})
     @PostMapping("/graduate")
     public GraduateResource createGraduate(@Valid @RequestBody SaveGraduateResource resource){
-        Graduate userNoChef = convertToEntity(resource);
-        return convertToResource(graduateService.createGraduate(userNoChef));
+        Graduate graduate = convertToEntity(resource);
+        return convertToResource(graduateService.createGraduate(graduate));
     }
 
     @Operation(summary = "Update graduate", description = "Update graduate with given Id", tags = {"graduate"})

@@ -2,8 +2,6 @@ package com.acme.graduates.demo.domain.service;
 
 
 import com.acme.graduates.demo.domain.model.Graduate;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
