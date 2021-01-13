@@ -13,7 +13,7 @@ public class SaveGraduateResource {
     private String Course;
 
     @NotNull
-    private  Integer Graduates;
+    private  String Graduates;
 
     public Integer getYear() {
         return year;
@@ -40,11 +40,12 @@ public class SaveGraduateResource {
         Course = course;
     }
 
-    public Integer getGraduates() {
+
+    public String getGraduates() {
         return Graduates;
     }
 
-    public void setGraduates(Integer graduates) {
+    public void setGraduates(String graduates) {
         Graduates = graduates;
     }
 }
